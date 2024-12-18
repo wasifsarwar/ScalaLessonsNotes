@@ -1,4 +1,4 @@
-package scala2_12_rockthejvm.lectures.part1basics
+package AdvancedScalaRockTheJVM.lectures.part1basics
 
 object StringOperationsInterpolations extends App{
 

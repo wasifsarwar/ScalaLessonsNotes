@@ -1,4 +1,4 @@
-package com.rockthejvm
+package RockTheJVMbasics
 
 object PatternMatching extends App{
 

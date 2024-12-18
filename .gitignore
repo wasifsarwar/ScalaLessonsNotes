@@ -12,7 +12,7 @@ src/.DS_Store
 src/main/.DS_Store
 src/main/scala/.DS_Store
 src/main/scala/com/.DS_Store
-src/main/scala/com/rockthejvm/package.scala
+src/main/scala/RockTheJVMbasics/package.scala
 
 # User-specific stuff
 .idea/**/workspace.xml
