@@ -1,74 +1,113 @@
 package com.rockthejvm
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.util.{Failure, Success, Try}
-import scala.concurrent.ExecutionContext.Implicits.global
 
 object Advanced extends App {
 
   /**
-    lazy evaluation
-   */
+    - lazy evaluation
+    - lazy values are usedful in infinite collections
+  */
   lazy val aLazyValue = 2
   lazy val lazyValueWithSideEffect = {
-    println("I am so very lazy!")
-    43
+    println("I am so lazy")
+    420
   }
-
   val eagerValue = lazyValueWithSideEffect + 1
-  // useful in infinite collections
 
   /**
-    "pseudo-collections": Option, Try
+   - "Pseudo-collections" : Option, Try
+   - Option and Try are useful in unsafe methods, meaning methods that can return null
+   - Options are collections which contains at most one element: if there's something it will be Some(), otherwise None
    */
-  def methodWhichCanReturnNull(): String = "hello, Scala"
-  val anOption = Option(methodWhichCanReturnNull()) // Some("hello, Scala")
-  // option = "collection" which contains at most one element: Some(value) or None
+  def methodThatCanReturnNull(): String = "hello, world"
+  val anOption = Option(methodThatCanReturnNull)
 
   val stringProcessing = anOption match {
-    case Some(string) => s"I have obtained a valid string: $string"
-    case None => "I obtained nothing"
+    case Some(string) => s"Found a string: $string"
+    case None => "what the hell"
   }
 
-  def methodWhichCanThrowException(): String = throw new RuntimeException
+  println(stringProcessing)
+
+  /**
+   - "Pseudo-collections" : Try
+   - Try() returns a collection with either a value if the code went well, or an exception if the code threw one
+   */
+
+  def methodWhichCanThrowException(): String = throw new RuntimeException("runtime error bhai")
+
+  try {
+    methodWhichCanThrowException()
+  } catch {
+    case e : Exception => println("oopsie hehe")
+    case _ => println("just do ya thang")
+  }
+
   val aTry = Try(methodWhichCanThrowException())
-  // a try = "collection" with either a value if the code went well, or an exception if the code threw one
-
   val anotherStringProcessing = aTry match {
-    case Success(validValue) => s"I have obtained a valid string: $validValue"
-    case Failure(ex) => s"I have obtained an exception: $ex"
+    case Success(value) => s"hallelujah i got the right value here $value"
+    case Failure(exception) => s"yikes we got an ${exception.getMessage}"
   }
-  // map, flatMap, filter
-
 
   /**
-    * Evaluate something on another thread
-    * (asynchronous programming)
-    */
-  val aFuture = Future {
+    - Evaluate something on another thread
+    - (asynchronous programming)
+    - Future is a "collection" which contains a value when it is evaluated
+    - Future[Unit]/whatever value is evaluated at the end of that future running
+    - Future is composable with map, flatMap and filter
+    - yes it is future
+  */
+  val aFuture = Future({
     println("Loading...")
-    Thread.sleep(1000)
-    println("I have computed a value.")
-    67
-  }
-
-  // future is a "collection" which contains a value when it's evaluated
-  // future is composable with map, flatMap and filter
+    Thread.sleep(500)
+    println("here's your value its 28")
+    28
+  })
 
   /**
-    * Implicits basics
-    */
-  // #1: implicit arguments
-  def aMethodWithImplicitArgs(implicit arg: Int) = arg + 1
-  implicit val myImplicitInt = 46
-  println(aMethodWithImplicitArgs)  // aMethodWithImplicitArgs(myImplicitInt)
+    - The aFuture code above prints "Loading..." because the main thread of the application
+    - finished before the future completed
+    - adding thread.sleep(1000) for 10s allows future to complete before main jvm is done fully executing
+   */
+  Thread.sleep(1000)
 
-  // #2: implicit conversions
-  implicit class MyRichInteger(n: Int) {
+  /**
+    - Monads
+    - Future, Try, Options are Monads
+   */
+
+
+  /**
+    - Implicits basics
+    - two common use cases
+    - use case#1 : Implicit arguments
+    - if there is method that accepts implicit arguments and there is a value with it,
+      then it will use that without needing to call that value as parameters
+  */
+
+  def aMethodWithImplicitArgs(implicit arg: Int) = arg + 1
+  implicit val myImplicitVal = 46
+  println(aMethodWithImplicitArgs)
+
+  /**
+   - Implicits basics
+   - use case#2 : Implicit conversions
+   - By declaring the class as implicit,
+     Scala automatically allows any integer to be wrapped by MyRichInteger whenever methods
+     that are not natively available on Int are called.
+   - This means that when you call 23.isEven(), Scala does not find an isEven method on the Int class directly.
+     Instead, it searches for implicit conversions that can wrap Int to provide the isEven method.
+     It finds the MyRichInteger class and uses it to wrap 23 into a MyRichInteger object, on which isEven is called.
+   - Use implicits with care.
+   */
+  implicit class  MyRichInteger(n: Int) {
     def isEven() = n % 2 == 0
   }
 
-  println(23.isEven()) // new MyRichInteger(23).isEven()
-  // use this carefully
+  println(23.isEven())
+  println(anotherStringProcessing)
 
 }

@@ -1,6 +1,6 @@
 package com.rockthejvm
 
-object FunctionalProgramming extends App {
+object FunctionalProgramming extends App{
 
   // Scala is OO
   class Person(name: String) {
@@ -8,100 +8,107 @@ object FunctionalProgramming extends App {
   }
 
   val bob = new Person("Bob")
-  bob.apply(43)
-  bob(43) // INVOKING bob as a function === bob.apply(43)
+  bob(43) // invoking bob as a function == bob.apply(43)
 
   /*
-    Scala runs on the JVM
-    Functional programming:
+    Scala runs on the jvm
+    Functional Programming:
     - compose functions
-    - pass functions as args
+    - pass functions as arguments
     - return functions as results
 
-    Conclusion: FunctionX = Function1, Function2, ... Function22
+    Conclusion: FunctionX = Function1, Function2,...., Function22
    */
 
-  val simpleIncrementer = new Function1[Int, Int] {
+  val simpleIncrementor = new Function1[Int,Int] {
     override def apply(arg: Int): Int = arg + 1
   }
 
-  simpleIncrementer.apply(23) // 24
-  simpleIncrementer(23) // simpleIncrementer.apply(23)
-  // defined a function!
+  simpleIncrementor(23)
 
-  // ALL SCALA FUNCTIONS ARE INSTANCES OF THESE FUNCTION_X TYPES
-
-  // function with 2 arguments and a String return type
+  // all scala functions are instances of these FUNCTION_X types
   val stringConcatenator = new Function2[String, String, String] {
     override def apply(arg1: String, arg2: String): String = arg1 + arg2
   }
 
-  stringConcatenator("I love", " Scala") // "I love Scala"
+  stringConcatenator("I love ", "scala")
 
-  // syntax sugars
-  val doubler: Int => Int = (x: Int) => 2 * x
+  // syntax sugars (alternative syntax to replace boilerplate code)
+  val doubler: Int => Int = (x : Int) => 2 * x
   doubler(4) // 8
 
+  val anotherDoubler = (x : Int) => 2 * x
+  anotherDoubler(4)
   /*
-    equivalent to the much longer:
+    equivalent to the much longer
 
-    val doubler: Function1[Int, Int] = new Function1[Int, Int] {
-      override def apply(x: Int) = 2 * x
+    val doubler = new Function1[Int, Int] {
+      override def apply(x: Int): Int = 2 * x
     }
    */
 
-  // higher-order functions: take functions as args/return functions as results
-  val aMappedList: List[Int] = List(1,2,3).map(x => x + 1) // HOF
-  val aFlatMappedList = List(1,2,3).flatMap { x =>
-    List(x, 2 * x)
-  } // alternative syntax, same as .flatMap(x => List(x, 2 * x))
-  val aFilteredList = List(1,2,3,4,5).filter(_ <= 3) // equivalent to x => x <= 3
 
-  // all pairs between the numbers 1, 2, 3 and the letters 'a', 'b', 'c'
-  val allPairs = List(1,2,3).flatMap(number => List('a', 'b', 'c').map(letter => s"$number-$letter"))
+  // higher-order functions: take functions as args/return functions as results
+  // the map method is the higher order function
+  val aMappedList = List(1,2,3).map(x => x + 1) // HOF
+  println(aMappedList)
+
+  val aFlatMappedList = List(1,2,3).flatMap{x =>
+    List(2 * x)
+  }
+  println(aFlatMappedList)
+
+  val aFilteredList = List(1,2,3,4,5).filter(x => x <= 3)
+  val anotherFilteredList = List(1,2,3,4,5).filter(_ <= 3)
+
+  // all pairs between 1,2,3 and the letters 'a', 'b', 'c'
+  val allPairs = List(1,2,3).flatMap(number => List('a','b','c').map(letter => s"$number-$letter"))
+  println(allPairs)
 
   // for comprehensions
   val alternativePairs = for {
     number <- List(1,2,3)
     letter <- List('a', 'b', 'c')
   } yield s"$number-$letter"
-  // equivalent to the map/flatMap chain above
 
-  /**
-    * Collections
-    */
+// this is equivalent to the map/flatMap chain above
+    println(alternativePairs)
 
-  // lists
+  /*
+   * Collections
+   *
+   */
+
   val aList = List(1,2,3,4,5)
   val firstElement = aList.head
   val rest = aList.tail
-  val aPrependedList = 0 :: aList // List(0,1,2,3,4,5)
-  val anExtendedList = 0 +: aList :+ 6 // List(0,1,2,3,4,5,6)
+  val aPrependedList = 0 :: aList // returns List(0,1,2,3,4,5)
+  val anExtendedList = 0 +: aList :+ 6 // returns List(0,1,2,3,4,5,6)
 
   // sequences
-  val aSequence: Seq[Int] = Seq(1,2,3) // Seq.apply(1,2,3)
-  val accessedElement = aSequence(1) // the element at index 1: 2
+  val aSequence : Seq[Int] = Seq(1,2,3) // Seq.apply() seq is an abstract type, and
+  val accessedElement = aSequence(1)
 
-  // vectors: fast Seq implementation
+  // vectors: fast sequence implementation
   val aVector = Vector(1,2,3,4,5)
 
-  // sets = no duplicates
-  val aSet = Set(1,2,3,4,1,2,3) // Set(1,2,3,4)
-  val setHas5 = aSet.contains(5) // false
-  val anAddedSet = aSet + 5 // Set(1,2,3,4,5)
-  val aRemovedSet = aSet - 3 // Set(1,2,4)
+  // sets: collections with no duplicates
+  val aSet = Set(1,2,3,4,5,1,2) //Set(1,2,3,4,5)
+  val setHas6 = aSet.contains(6) //false
+  val anAddedSet = aSet + 6 // Set(1,2,3,4,5,6)
+  val aRemovedSet = aSet - 6 // Set(1,2,3,4,5)
 
   // ranges
   val aRange = 1 to 1000
-  val twoByTwo = aRange.map(x => 2 * x).toList // List(2,4,6,8..., 2000)
+  val twoBytwo = aRange.map(x => 2 * x).toList
 
-  // tuples = groups of values under the same value
+  // tupes = groups of values under the same value
   val aTuple = ("Bon Jovi", "Rock", 1982)
 
   // maps
-  val aPhonebook: Map[String, Int] = Map(
-    ("Daniel", 6437812),
-    "Jane" -> 327285 // ("Jane", 327285)
+  val aMap: Map[String, Int] = Map(
+    ("Daniel", 9292),
+    "Jane" -> 12412
   )
 
 
