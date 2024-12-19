@@ -41,12 +41,12 @@ object BasicsW extends App {
   }
 
   // recursive function
-  def factorial(n : Int): Int =
+  def factorial(n: Int): Int =
     if (n <= 1) 1
-    else n * factorial(n-1)
+    else n * factorial(n - 1)
 
   // in scala there's no loops or iteration, only recursion
-  // the Unit type = no meaningful value == "void" 
+  // the Unit type = no meaningful value == "void"
 
   println(interpolatedString)
   println(chainedIfExpression)

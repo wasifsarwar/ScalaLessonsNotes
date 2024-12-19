@@ -1,6 +1,6 @@
 package RockTheJVMbasics
 
-object FunctionalProgramming extends App{
+object FunctionalProgramming extends App {
 
   // Scala is OO
   class Person(name: String) {
@@ -20,7 +20,7 @@ object FunctionalProgramming extends App{
     Conclusion: FunctionX = Function1, Function2,...., Function22
    */
 
-  val simpleIncrementor = new Function1[Int,Int] {
+  val simpleIncrementor = new Function1[Int, Int] {
     override def apply(arg: Int): Int = arg + 1
   }
 
@@ -34,10 +34,10 @@ object FunctionalProgramming extends App{
   stringConcatenator("I love ", "scala")
 
   // syntax sugars (alternative syntax to replace boilerplate code)
-  val doubler: Int => Int = (x : Int) => 2 * x
+  val doubler: Int => Int = (x: Int) => 2 * x
   doubler(4) // 8
 
-  val anotherDoubler = (x : Int) => 2 * x
+  val anotherDoubler = (x: Int) => 2 * x
   anotherDoubler(4)
   /*
     equivalent to the much longer
@@ -47,53 +47,55 @@ object FunctionalProgramming extends App{
     }
    */
 
-
   // higher-order functions: take functions as args/return functions as results
   // the map method is the higher order function
-  val aMappedList = List(1,2,3).map(x => x + 1) // HOF
+  val aMappedList = List(1, 2, 3).map(x => x + 1) // HOF
   println(aMappedList)
 
-  val aFlatMappedList = List(1,2,3).flatMap{x =>
+  val aFlatMappedList = List(1, 2, 3).flatMap { x =>
     List(2 * x)
   }
   println(aFlatMappedList)
 
-  val aFilteredList = List(1,2,3,4,5).filter(x => x <= 3)
-  val anotherFilteredList = List(1,2,3,4,5).filter(_ <= 3)
+  val aFilteredList = List(1, 2, 3, 4, 5).filter(x => x <= 3)
+  val anotherFilteredList = List(1, 2, 3, 4, 5).filter(_ <= 3)
 
   // all pairs between 1,2,3 and the letters 'a', 'b', 'c'
-  val allPairs = List(1,2,3).flatMap(number => List('a','b','c').map(letter => s"$number-$letter"))
+  val allPairs = List(1, 2, 3).flatMap(number =>
+    List('a', 'b', 'c').map(letter => s"$number-$letter")
+  )
   println(allPairs)
 
   // for comprehensions
   val alternativePairs = for {
-    number <- List(1,2,3)
+    number <- List(1, 2, 3)
     letter <- List('a', 'b', 'c')
   } yield s"$number-$letter"
 
 // this is equivalent to the map/flatMap chain above
-    println(alternativePairs)
+  println(alternativePairs)
 
   /*
    * Collections
    *
    */
 
-  val aList = List(1,2,3,4,5)
+  val aList = List(1, 2, 3, 4, 5)
   val firstElement = aList.head
   val rest = aList.tail
   val aPrependedList = 0 :: aList // returns List(0,1,2,3,4,5)
   val anExtendedList = 0 +: aList :+ 6 // returns List(0,1,2,3,4,5,6)
 
   // sequences
-  val aSequence : Seq[Int] = Seq(1,2,3) // Seq.apply() seq is an abstract type, and
+  val aSequence: Seq[Int] =
+    Seq(1, 2, 3) // Seq.apply() seq is an abstract type, and
   val accessedElement = aSequence(1)
 
   // vectors: fast sequence implementation
-  val aVector = Vector(1,2,3,4,5)
+  val aVector = Vector(1, 2, 3, 4, 5)
 
   // sets: collections with no duplicates
-  val aSet = Set(1,2,3,4,5,1,2) //Set(1,2,3,4,5)
+  val aSet = Set(1, 2, 3, 4, 5, 1, 2) //Set(1,2,3,4,5)
   val setHas6 = aSet.contains(6) //false
   val anAddedSet = aSet + 6 // Set(1,2,3,4,5,6)
   val aRemovedSet = aSet - 6 // Set(1,2,3,4,5)
@@ -110,6 +112,5 @@ object FunctionalProgramming extends App{
     ("Daniel", 9292),
     "Jane" -> 12412
   )
-
 
 }

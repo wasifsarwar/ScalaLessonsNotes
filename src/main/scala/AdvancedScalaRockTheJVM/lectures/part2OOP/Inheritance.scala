@@ -13,18 +13,17 @@ object Inheritance extends App {
       super.eat
       println("that's what my cat sound like")
     }
-  }//Cat is the subclass, Animal is superclass
+  } //Cat is the subclass, Animal is superclass
   val cat = new Cat
 
   cat.eat
   cat.crunch
 
-  /**
-    * Scala also supports type substitution, which is broadly speaking polymorphism
-   * method calls will refer to running the most overridden method in parent trait/class
-   * Overriding means changing method logic in sub/child class
-   * Overloading means changing method signature
-   */
+  /** Scala also supports type substitution, which is broadly speaking polymorphism
+    * method calls will refer to running the most overridden method in parent trait/class
+    * Overriding means changing method logic in sub/child class
+    * Overloading means changing method signature
+    */
 
   val unknownAnimal: Animal = new Cat
 
@@ -43,14 +42,10 @@ object Inheritance extends App {
   // Type Substitution == polymorphism
   val unknownDog: Animal = new Dog
 
-
-  /**
-   * preventing overrides
-   * use final on method or entire class
-   * seal the class
-   * This means classes inherited in the same file, but you can't inherit sealed class in other files
-  */
-
-
+  /** preventing overrides
+    * use final on method or entire class
+    * seal the class
+    * This means classes inherited in the same file, but you can't inherit sealed class in other files
+    */
 
 }

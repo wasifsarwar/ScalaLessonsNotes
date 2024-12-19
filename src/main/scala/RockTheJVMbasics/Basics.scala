@@ -17,7 +17,9 @@ object Basics extends App {
   val anExpression = 2 + 3
 
   // if-expression
-  val ifExpression = if (meaningOfLife > 43) 56 else 999 // in other languages: meaningOfLife > 43 ? 56 : 999
+  val ifExpression =
+    if (meaningOfLife > 43) 56
+    else 999 // in other languages: meaningOfLife > 43 ? 56 : 999
   val chainedIfExpression =
     if (meaningOfLife > 43) 56
     else if (meaningOfLife < 0) -2
@@ -60,7 +62,6 @@ object Basics extends App {
   def myUnitReturningFunction(): Unit = {
     println("I don't love returning Unit")
   }
-
 
   val theUnit = ()
 }
