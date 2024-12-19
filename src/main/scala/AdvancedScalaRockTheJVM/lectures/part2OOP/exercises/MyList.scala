@@ -50,9 +50,12 @@ class Cons(h: Int, t: MyList) extends MyList {
 }
 
 object ListTest extends App {
-  val list = new Cons(1, Empty)
+  val list = new ConsGeneric(1, EmptyGeneric)
   println(list.head)
-  val anotherList = new Cons(1, new Cons(2, new Cons(3, new Cons(4, Empty))))
+  val anotherList = new ConsGeneric(1, new ConsGeneric(2, new ConsGeneric(3, new ConsGeneric(4, EmptyGeneric))))
   println(anotherList.tail.tail.tail.head)
   println(anotherList.add(5).toString)
+
+  val listOfString = new ConsGeneric("Wasif", new ConsGeneric("Labiba", EmptyGeneric))
+  println(listOfString.toString)
 }
