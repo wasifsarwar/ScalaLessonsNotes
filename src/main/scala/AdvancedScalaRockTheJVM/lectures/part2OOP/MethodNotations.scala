@@ -28,10 +28,6 @@ object MethodNotations extends App{
      * Use it in postfix notation
      */
 
-    /*
-     * Overload the apply method
-     * mary.apply(2) => "Mary watched Inception 2 times"
-     */
 
     // unary operator
     def unary_! : String = s"what the heck!!"
