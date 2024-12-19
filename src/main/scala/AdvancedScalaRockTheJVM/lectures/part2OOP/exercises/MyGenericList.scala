@@ -170,7 +170,7 @@ object ListTestGeneric extends App {
   = [1,2] ++ [2,3] ++ Empty.flatMap(n => [n, n+1])
   = [1,2] ++ [2,3] ++ Empty
   = [1, 2, 2, 3]
- */
+   */
 
   println(anotherList.flatMap(new MyTransformer[Int, MyGenericList[Int]] {
     override def transform(element: Int): MyGenericList[Int] =

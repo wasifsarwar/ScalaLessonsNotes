@@ -2,39 +2,33 @@ package AdvancedScalaRockTheJVM.lectures.part2OOP
 
 object Generics extends App {
 
-  /**
-   * Takeaways 1
-   * Use the same code on many (potentially unrelated) types
-   * Generic methods -> adding a type parameter next of method signature before params with [A]
-   * Multiple type parameters allowed -> Map[Key, Value]
-   *
-   */
+  /** Takeaways 1
+    * Use the same code on many (potentially unrelated) types
+    * Generic methods -> adding a type parameter next of method signature before params with [A]
+    * Multiple type parameters allowed -> Map[Key, Value]
+    */
 
-  /**
-   * Takeaways 2 - Variance: if subclass A extends parent class B, should List[A] extend List[B]
-   * trait List[+A] -> yes(covariant)
-   * trait List[A] -> no (invariant) so both types need to match -> List[A] = new List[A]
-   * trait List[-A] -> hell no! (contravariant) if A extends B, then super class List[B] extends the subclass List[A]
-   */
+  /** Takeaways 2 - Variance: if subclass A extends parent class B, should List[A] extend List[B]
+    * trait List[+A] -> yes(covariant)
+    * trait List[A] -> no (invariant) so both types need to match -> List[A] = new List[A]
+    * trait List[-A] -> hell no! (contravariant) if A extends B, then super class List[B] extends the subclass List[A]
+    */
 
-  /**
-   * Takeaways 3 - Bounded Types
-   *  < : this is upper bound
-   *  >: this is lower bound
-   */
+  /** Takeaways 3 - Bounded Types
+    *  < : this is upper bound
+    *  >: this is lower bound
+    */
 
   class MyList[+A] {
-    /**
-     *
-     * @param element
-     * @tparam B which is a super type of A
-     * @return
-     */
 
-    /**
-     * B >: A means that B must be a supertype of A.
-     * This allows the method to accept elements of type A or any of its supertypes, ensuring type safety while allowing flexibility in the types that can be added to the list.
-     */
+    /** @param element
+      * @tparam B which is a super type of A
+      * @return
+      */
+
+    /** B >: A means that B must be a supertype of A.
+      * This allows the method to accept elements of type A or any of its supertypes, ensuring type safety while allowing flexibility in the types that can be added to the list.
+      */
     def add[B >: A](element: B): MyList[B] = ???
 
     /*
