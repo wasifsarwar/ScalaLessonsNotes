@@ -1,5 +1,6 @@
 # Collections
 
+
 ## Immutable Collections
 
 ***Immutable collections*** are found in `scala.collections.immutable` package
@@ -56,7 +57,8 @@ Supports various operations:
 - concatenation, appending, prepending
 - grouping, sorting, zipping, searching, slicing
 
-### List
+
+## List
 A LinearSeq *immutable* linked list
 - head, tail, `isEmpty` methods are fast: *O(1)*
 - most other operations are *O(n)*: `length`, `reverse`
@@ -72,7 +74,8 @@ Lists are *Sealed*, it has two subtypes:
 - `object Nil(empty)`
 - `class ::`
 
-### Array
+
+## Array
 The equivalent of simple Java arrays
 - can be manually constructed with predefined lengths
 - can be *mutated* (updated in place)
@@ -85,7 +88,11 @@ final class Array[T]
   with java.lang.Cloneable
 ```
 
-### Vector
+
+## Vector
+```scala
+final class Vector[+A]
+```
 The default implementation for *immutable sequences*
 - *effectively constant* indexed read & write: *O(1)*
 - fast element addition: append/prepend
@@ -98,15 +105,12 @@ val numbers = noElements :+ 1 :+ 2 :+ 3 //Vector(1, 2, 3)
 val modified = numbers updated (0, 8) //Vector( 8, 2, 3)
 ```
 
-```scala
-final class Vector[+A]
-```
-
-### Lists vs Vectors
+## Lists vs Vectors
 - List keeps references to tail vs Vector's depth of the tree is small
 - Updating an element in List takes long time. Updating an element in vector means replacing an entire 32-element chunk
 
-### Tuples
+
+## Tuples
 
 ```scala
 val tuple = (42, "RockTheJVM")
@@ -116,7 +120,8 @@ tuple.toString // "(42, RockTheJVM)" <----- pretty print
 tuple.swap // ("RockTheJVM", 42) <----- swap elements
 ```
 
-### Maps
+
+## Maps
 ```scala
 val phoneBook = Map("Jim" -> 4257, "Sally" -> 3184)
 phoneBook.contails("Jim") //true
