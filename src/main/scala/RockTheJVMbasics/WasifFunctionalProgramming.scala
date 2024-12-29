@@ -140,7 +140,7 @@ object WasifFunctionalProgramming extends App {
     */
 
   val aTuple =
-    ("Bon Jovie", "Glam Rock", 1982) //tuple is defined with parentheses
+    ("Bon Jovi", "Glam Rock", 1982) //tuple is defined with parentheses
 
   // maps
   val aMap: Map[String, Int] = Map(

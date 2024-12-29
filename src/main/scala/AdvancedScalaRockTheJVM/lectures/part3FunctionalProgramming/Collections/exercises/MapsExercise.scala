@@ -109,18 +109,23 @@ object MapsExercise extends App {
   }
 
   def anotherIsMutual(
-                network: Map[String, Set[String]],
-                person: String,
-                potentialMutual: String
-              ): Boolean = {
-    def bfs(target: String, consideredPeople: Set[String], discoveredPeople: Set[String]): Boolean = {
+      network: Map[String, Set[String]],
+      person: String,
+      potentialMutual: String
+  ): Boolean = {
+    def bfs(
+        target: String,
+        consideredPeople: Set[String],
+        discoveredPeople: Set[String]
+    ): Boolean = {
       if (discoveredPeople.isEmpty) false
       else {
         val person = discoveredPeople.head
         if (person == target) true
         else {
           val newConsideredPeople = consideredPeople + person
-          val newDiscoveredPeople = discoveredPeople.tail ++ network(person).diff(newConsideredPeople)
+          val newDiscoveredPeople =
+            discoveredPeople.tail ++ network(person).diff(newConsideredPeople)
           bfs(target, newConsideredPeople, newDiscoveredPeople)
         }
       }
@@ -181,11 +186,6 @@ object MapsExercise extends App {
     network.count(pair => pair._2.isEmpty)
     // network.count(_._2.isEmpty)
   }
-
-  def socialConnection(
-      network: Map[String, Set[String]],
-
-                      )
 
   val empty: Map[String, Set[String]] = Map()
   var network = addPerson(
