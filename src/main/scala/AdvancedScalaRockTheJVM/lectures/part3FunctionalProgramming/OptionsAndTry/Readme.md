@@ -59,3 +59,14 @@ sealed abstract class Try[+T]
 case class Failure[+T](t: Throwable) extends Try[T] // wrap failed computations
 case class Success[+T](value: T) extends Try[T] // wrap succeeded computations
 ```
+
+Use Try to handle exceptions gracefully:
+- avoid runtime crashes due to uncaught exceptions
+- avoid an endless amount of try-catches
+
+A functioal way of dealing with failure
+- *map*, *flatMap*, *filter*
+- *orElse*
+- others: *fold*, *collect*, *toList*, conversion to *Option[]*
+
+If you design a method to return some type but may throw an exception, return a **Try[*that type*]** instead
