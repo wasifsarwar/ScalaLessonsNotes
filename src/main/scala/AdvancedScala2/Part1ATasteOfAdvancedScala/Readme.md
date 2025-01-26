@@ -1,15 +1,13 @@
 # Scala Recap
 
-## Instructions vs Expressions
-
+Instructions vs Expressions
 ---
 - Instructions are the fundamental operation of imperative languages like Java, Python or C++
   - Instructions are executed in sequence to do things for programs
 - In functional languages such as Scala, programs are constructed through expressions; by building expressions on 
   top of other expressions
 
-## Code Block
-
+Code Block
 ---
 ```scala
 val aCondition: Boolean = false
@@ -24,8 +22,7 @@ val aCodeBlock = {
 - Compiler infers types for us. 
 - `Unit` means the type of expressions that doesn't return a value, but does something when called. Compare to `void` in Java
 
-## Functions, Recursion
-
+Functions, Recursion
 ---
 ```scala
 import scala.annotation.tailrec
@@ -43,8 +40,7 @@ def factorial(n: Int) : Int = {
 ```
 - Tail recursive functions allow us to not use additional stack frames for computing values
 
-## Object-Oriented Language
-
+Object-Oriented Language
 ---
 ```scala
 class Animal
@@ -82,8 +78,7 @@ val aCarnivore = new Carnivore {
 Scala is more object-oriented than Java/C++ because it is designed around classes and objects
 
 
-## Generics, Case Classes, Exceptions & Try/Catch/Finally
-
+Generics, Case Classes, Exceptions & Try/Catch/Finally
 ---
 ```scala
 /**
@@ -115,8 +110,7 @@ val aPotentialFailure = try {
 - `Nothing` has no instances. `Nothing` is also a proper replacement type for any other type
   - `Nothing` is the type of *nothingness* in Scala someway
 
-## Functional Programming
-
+Functional Programming
 ---
 In Scala, functions are instances of classes with `apply` methods
 ```scala
