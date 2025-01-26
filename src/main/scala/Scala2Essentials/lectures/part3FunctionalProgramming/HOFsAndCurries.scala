@@ -8,6 +8,13 @@ object HOFsAndCurries extends App {
     * Currying deals with functions with multiple parameter lists
     */
 
+  /** Scala provides a relatively lightweight syntax for defining anonymous functions.
+    * Anonymous functions in source code are called function literals and at run time, function literals are instantiated into objects called function values.
+    *
+    * Scala supports first-class functions, which means you can express functions in function literal syntax, i.e. (x: Int) => x + 1,
+    * and those functions can be represented by objects, which are called function values
+    */
+
   /** SuperFunction is a higher order function e.g map, flatMap, filter
     * Return type of superFunction is another function that takes an Int and returns an Int
     * the second parameter of superFunction is another function (String, (Int => Boolean) that returns an Int

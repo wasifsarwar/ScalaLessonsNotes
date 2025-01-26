@@ -1,4 +1,5 @@
-# Scala Recap
+Scala Recap
+---
 
 Instructions vs Expressions
 ---
