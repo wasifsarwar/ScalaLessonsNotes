@@ -168,6 +168,16 @@ class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
       */
   }
 
+  /** @param elem
+    * @return new Set with removed element
+    * this function is looking at head == element and returns tail, otherwise looks at remaining
+    * tail.head and adds the previous head to returned set
+    */
+  def remove(elem: A): MySet[A] = {
+    if (head == elem) tail
+    else tail.remove(elem) + head
+  }
+
   /** @param f function to map that takes A and returns a new element type B
     * @tparam B return type
     * @return a new Set with mapped elements
@@ -194,16 +204,6 @@ class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
   def foreach(f: A => Unit): Unit = {
     f(head)
     tail.foreach(f) // or tail foreach f
-  }
-
-  /** @param elem
-    * @return new Set with removed element
-    * this function is looking at head == element and returns tail, otherwise looks at remaining
-    * tail.head and adds the previous head to returned set
-    */
-  def remove(elem: A): MySet[A] = {
-    if (head == elem) tail
-    else tail.remove(elem) + head
   }
 
   /** this is a simpler way to do intersect, where filter is called on anotherSet.contains() function
@@ -240,11 +240,31 @@ class NonEmptySet[A](head: A, tail: MySet[A]) extends MySet[A] {
 object MySet {
   // A* means multiple values of type A can be passed
   def apply[A](values: A*): MySet[A] = {
+
+    /** The buildSet function takes a sequence of elements valSeq and an accumulator acc of type MySet[A].
+      * It recursively processes the sequence to build the set.
+      * @param valSeq Seq of values type A
+      * @param acc
+      * @return
+      */
+
     @tailrec
     def buildSet(valSeq: Seq[A], acc: MySet[A]): MySet[A] = {
+
+      /** The base case of the recursion checks if the sequence is empty
+        * If the sequence is empty, it returns the accumulated set.
+        */
       if (valSeq.isEmpty) acc
+
+      /** The recursive case processes the head of the sequence and adds it to the accumulator
+        * It then calls itself with the tail of the sequence and the updated accumulator.
+        */
       else buildSet(valSeq.tail, acc + valSeq.head)
     }
+
+    /** Finally, the apply method calls the buildSet function with the initial sequence of values and an empty set
+      * This initializes the set-building process and returns the resulting MySet[A].
+      */
     buildSet(values, new EmptySet[A])
   }
 
